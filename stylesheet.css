@@ -1,0 +1,58 @@
+.rubik {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.black-bg {
+    background-color: black;
+    color: white;
+}
+
+html, body {
+    margin: none;
+    padding: 0px;
+}
+
+.asideMargins {
+    margin-inline: 30vw;
+}
+.asideMarginsSmall {
+    margin-inline: 15vw;
+}
+.title {
+    font-size: 5vh;
+}
+
+@media (width <= 700px) {
+  #introThing {
+    grid-template-columns: 0.05fr 0.9fr 0.05fr !important;
+  }
+  .asideMargins {
+      margin-inline: 0.5vw !important;
+  }
+}
+
+.upLine {
+    border-top: 1px solid #212121;
+}
+.downLine {
+    border-bottom: 1px solid #212121;
+}
+.horLines {
+    border-left: 1px solid #212121;
+    border-right: 1px solid #212121;
+}
+
+.arrow {
+    transition: 0.8s;
+}
+.arrow:hover {
+    transform: translate(10%, 0%);
+}
+
+#socialText {
+    text-decoration: none;
+    color: white;
+}
