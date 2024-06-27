@@ -1,3 +1,7 @@
+html {
+    --borderText: #212121;
+}
+
 .rubik {
   font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
@@ -11,7 +15,7 @@
 }
 
 html, body {
-    margin: none;
+    margin: 0px;
     padding: 0px;
 }
 
@@ -24,25 +28,47 @@ html, body {
 .title {
     font-size: 5vh;
 }
+#socialLogo2 {
+    display: none;
+}
+.mobileOnlyAsideMargins {
+    margin-inline: 0px;
+}
 
-@media (width <= 700px) {
-  #introThing {
-    grid-template-columns: 0.05fr 0.9fr 0.05fr !important;
-  }
-  .asideMargins {
-      margin-inline: 0.5vw !important;
-  }
+@media (width <= 1000px) {
+    #introThing {
+        grid-template-columns: 0fr 1fr 0fr !important;
+    }
+    .asideMargins {
+        margin-inline: 35px !important;
+    }
+    .mobileOnlyAsideMargins {
+        margin-inline: 35px !important;
+    }
+    #socialLogo2 {
+        display: block !important;
+    }
+    #socialLogo {
+        display: none !important;
+    }
+    html {
+        --borderText: #404040;
+    }
+    .horLines {
+        border-left: none !important;
+        border-right: none !important;
+    }
 }
 
 .upLine {
-    border-top: 1px solid #212121;
+    border-top: 1px solid var(--borderText);
 }
 .downLine {
-    border-bottom: 1px solid #212121;
+    border-bottom: 1px solid var(--borderText);
 }
 .horLines {
-    border-left: 1px solid #212121;
-    border-right: 1px solid #212121;
+    border-left: 1px solid var(--borderText);
+    border-right: 1px solid var(--borderText);
 }
 
 .arrow {
