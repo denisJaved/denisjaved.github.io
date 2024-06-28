@@ -28,6 +28,9 @@ html, body {
 .title {
     font-size: 5vh;
 }
+.sm-title {
+    font-size: 4vh;
+}
 #socialLogo2 {
     display: none;
 }
