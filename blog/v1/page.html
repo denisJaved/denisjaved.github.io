@@ -1,0 +1,95 @@
+<html lang="en" class="black-bg">
+    <head>
+        <title>
+            title
+        </title>
+        <link href="../../stylesheet.css" rel="stylesheet">
+
+        <meta charset="UTF-8">
+        <meta name="robots" content="none">
+
+        <!-- >  GOOGLE FONTS  </!-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    </head>
+    <body class="black-bg rubik">
+        <div class="asideMargins">
+            <div id="contents">
+
+            </div>
+        </div>
+
+        <script>
+            // source=github::denisjaved&path=blog::blog::projects
+            const urlParams = new URLSearchParams(window.location.search);
+            let source = urlParams.get('source');
+            let path = urlParams.get('path');
+
+            parseURL();
+
+            function parseURL() {
+                if (source == null) {
+                    console.error("%c PARSER " + "%c " + "%c Incorrect url " + "%c   Cannot find source arg", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                    return;
+                }
+
+                source = source.split("::");
+
+                if (path == null) {
+                    console.error("%c PARSER " + "%c " + "%c Incorrect url " + "%c   Cannot find path arg", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                    return;
+                }
+
+                path = path.replaceAll("::","/");
+
+                if (source.length != 2) {
+                    console.error("%c PARSER " + "%c " + "%c Incorrect url " + "%c   Invalid source arg", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                    return;
+                }
+
+                let domain = null;
+
+                if (source[0] == "github") {
+                    domain = "https://%value%.github.io/"
+                }
+
+                if (domain == null) {
+                    console.error("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Invalid source name", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                }
+
+                console.log("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Loading data...", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                let promise = fetch(domain.replace("%value%", source[1]) + path + ".json")
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Data caught!", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                        console.log("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Verifying collected data", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+
+                        if (!data.title) {
+                            console.error("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Collected data has no \"title\" value", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                            return;
+                        }
+                        if (!data.contents) {
+                            console.error("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Collected data has no \"contents\" value", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                            return;
+                        }
+                        if (!data.type) {
+                            console.error("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Collected data has no \"type\" value", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+                            return;
+                        }
+
+                        const contents = document.getElementById("contents");
+                        if (data.type == "html") {
+                            console.log("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Rendering with \"text\" type.", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+
+                            contents.innerHTML = data.contents;
+                        } else if (data.type == "text") {
+                            console.log("%c PARSER " + "%c " + "%c DATA LOADER " + "%c   Rendering with \"text\" type.", "background: purple; border-radius: 5px;", "", "background: green; border-radius: 5px;", "");
+
+                            contents.innerHTML = "<p>" + data.contents + "</p>";
+                        }
+                    });
+            }
+        </script>
+    </body>
+</html>

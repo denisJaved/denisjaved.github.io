@@ -1,4 +1,5 @@
 {
   "title": "My projects",
-  "contents": "<My projects will be here>"
+  "contents": "<p> My projects will be here </p>",
+  "type": "html"
 }
