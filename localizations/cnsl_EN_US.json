@@ -1,0 +1,11 @@
+{
+    "version": "v1",
+    "lang": "EN_US",
+
+
+    "welcome_msg_1": "Для русского языка введите \"language RU_RU\" без кавычек",
+    "welcome_msg_2": "",
+    "welcome_msg_3": "Hi! It's looks like you first time here. Type help to know what commands you can use.",
+
+    "help": ["whoyouare - says who DenisJava is", "projects - shows mine projects", "", "help - shows this page", "echo - sends text to console", "@echo - toggles user input echo"]
+}

@@ -1,0 +1,12 @@
+{
+    "version": "v1",
+    "lang": "RU_RU",
+
+
+    "welcome_msg_1": "For english language type language EN_US",
+    "welcome_msg_2": "",
+    "welcome_msg_3": "Привет! Похоже ты здесь первый раз. Напиши help, чтобы узнать все комманды.",
+
+    "help": ["whoyouare - рассказывает кто я", "projects - показывает мои проекты", "", "help - показывает эту страницу", "echo - отправляет текст в консоль", "@echo - переключает отображения комманд пользователя"],
+    "intro": ["Кто я? Введи whoyouare", "Что я делаю? Введи projects"]
+}
