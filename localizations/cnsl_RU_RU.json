@@ -8,5 +8,17 @@
     "welcome_msg_3": "Привет! Похоже ты здесь первый раз. Напиши help, чтобы узнать все комманды.",
 
     "help": ["whoyouare - рассказывает кто я", "projects - показывает мои проекты", "", "help - показывает эту страницу", "echo - отправляет текст в консоль", "@echo - переключает отображения комманд пользователя"],
-    "intro": ["Кто я? Введи whoyouare", "Что я делаю? Введи projects"]
+    "intro": ["projects - мои проекты"],
+
+    "whoyouare": ["Я DenisJava - разработчик на Java и NodeJS.", "| Social network | Username  | Link                                |", "|----------------|-----------|-------------------------------------|", "| Discord        | denisjava | отправь заявку в друзья             |", "| Modrinth       | DenisJava | https://modrinth.com/user/DenisJava |"],
+    "projects": ["->> Мои проекты:", "[this] Сайт для профиля в стили консоли", "[ -1 ] Онлайн аллерголог", "[ 0  ] Home Sweet Home", "", "Используйте комманду project, чтобы получить больше информации."],
+    "projectData": {
+        "this": {
+            "name": "Мой профиль",
+            "description": ["       | Сайт сделан в стиле консоли.", "       | Пользователи linux заценят!"],
+            "link": "https://denisjaved.github.io/"
+        }
+    },
+
+    "project": "Проект"
 }

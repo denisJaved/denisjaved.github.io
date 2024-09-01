@@ -43,6 +43,11 @@
             ::-webkit-scrollbar {
                 display: none;
             }
+            .line {
+                text-wrap: nowrap;
+                white-space: nowrap;
+                white-space-collapse: preserve;
+            }
         </style>
     </head>
     <body>
@@ -51,7 +56,7 @@
         </div>
         <div id="btme">
             <label class="bigger" for="stdin" style="margin: 15px;">></label>
-            <input autocomplete="none" class="bigger" type="text" name="stdin" id="stdin" placeholder="type command or help" onchange="send(this.value); this.value = '';">
+            <input autocomplete="off" class="bigger" type="text" name="stdin" id="stdin" placeholder="type command or help" oninput="fireAutoComplete(this.value);" onchange="send(this.value); this.value = '';">
         </div>
 
         <script>
@@ -122,9 +127,53 @@
                     } else {
                         postErr("Usage: language <LM name>");
                     }
+                } else if (i === "whoyouare") {
+                    lang.whoyouare.forEach(e => {post(e)});
+                } else if (i === "projects") {
+                    lang.projects.forEach(e => {post(e)});
+                } else if (i.startsWith("project")){
+                    if (i.startsWith("project ")) {
+                        l = i.substring(8);
+                        if (lang.projectData[l]) {
+                            const pr = lang.projectData[l];
+                            post(lang.project + " | " + pr.name)
+                            pr.description.forEach(e => {post(e)});
+                            post(":website: " + pr.link)
+                        } else {
+                            r = getRandomInt(0, 3); /* Switch-cases? No idea what is it */
+                            if (r == 0) {
+                                postErr("Umm, what you trying to find? I don't think there is project #" + l);
+                            } else if (r == 1) {
+                                postErr("What you talking about?");
+                            } else if (r == 2) {
+                                postErr("Looks like you got something wrong \\•-•/");
+                            } else if (r == 3) {
+                                postErr("404 I guess...");
+                            }
+                        }
+                    } else {
+                        postErr("Usage: project <project id>");
+                    }
+                } else if (i == "rm -rf /") {
+                    post("rm: it is dangerous to operate recursively on '/'");
+                    post("rm: use --no-preserve-root to override this failsafe");
+                } else if (i == "rm -rf / --no-preserve-root" || i == "rm -rf --no-preserve-root /" || i == "rm --no-preserve-root -rf /") {
+                    window.close();
+                    post("Hah. Your window should close.")
+                } else if (i.startsWith("sudo")){
+                    postErr("WDYM? No user system here) Do whatever you want!");
+                } else if (i === "license"){
+                    post("AGPL-3.0 license");
+                    post("https://github.com/denisJaved/denisjaved.github.io?tab=AGPL-3.0-1-ov-file");
                 } else {
                     postErr("Unknown command recived: " + i);
                 }
+            }
+
+            function getRandomInt(min, max) { /* stackoverflow moment :) */
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
             }
 
 
@@ -133,6 +182,7 @@
                 e.parentElement = screen;
                 e.innerText = i;
                 e.setAttribute("style", st);
+                e.setAttribute("class", "line")
                 screen.insertBefore(e, phe);
                 screen.scrollTo(0, screen.scrollHeight);
             }
@@ -141,6 +191,11 @@
             }
             function postErr(i) {
                 postRaw(i, "color: red;")
+            }
+
+
+            function fireAutoComplete(currentInput) {
+                
             }
 
 
@@ -157,7 +212,15 @@
                     post(lang.welcome_msg_3)
                     lang.intro.forEach(e => {post(e)});
                     localStorage.setItem("hideWelcomeMsg", "true")
+                    send("whoyouare");
                 }
+
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                
+                urlParams.getAll("run").forEach((e) => {
+                    send(e);
+                });
             }
         </script>
     </body>

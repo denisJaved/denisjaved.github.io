@@ -7,5 +7,18 @@
     "welcome_msg_2": "",
     "welcome_msg_3": "Hi! It's looks like you first time here. Type help to know what commands you can use.",
 
-    "help": ["whoyouare - says who DenisJava is", "projects - shows mine projects", "", "help - shows this page", "echo - sends text to console", "@echo - toggles user input echo"]
+    "help": ["whoyouare - says who DenisJava is", "projects - shows mine projects", "", "help - shows this page", "echo - sends text to console", "@echo - toggles user input echo"],
+    "intro": ["projects - my projects (obvious right?)"],
+
+    "whoyouare": ["I'm DenisJava. A Java/NodeJS developer.", "| Social network | Username  | Link                                |", "|----------------|-----------|-------------------------------------|", "| Discord        | denisjava | send friend request                 |", "| Modrinth       | DenisJava | https://modrinth.com/user/DenisJava |"],
+    "projects": ["->> My projects:", "[this] This website", "[ -1 ] Онлайн аллерголог [NO INFO] [RU Only]", "[ 0  ] Home Sweet Home [NO INFO]", "", "Use project to get more info."],
+    "projectData": {
+        "this": {
+            "name": "Мой профиль",
+            "description": ["        | Website made in terminal style.", "        | Linux user gonna love this ♥"],
+            "link": "https://denisjaved.github.io/"
+        }
+    },
+
+    "project": "Project"
 }
