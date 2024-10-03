@@ -7,7 +7,7 @@
     "welcome_msg_2": "",
     "welcome_msg_3": "Hi! It's looks like you first time here. Type help to know what commands you can use.",
 
-    "help": ["whoyouare - says who DenisJava is", "projects - shows mine projects", "", "help - shows this page", "echo - sends text to console", "@echo - toggles user input echo"],
+    "help": ["whoyouare - says who DenisJava is", "projects - shows mine projects", "", "help - shows this page", "echo - sends text to console", "@echo - toggles user input echo", "@clear - deletes all data this website created"],
     "intro": ["projects - my projects (obvious right?)"],
 
     "whoyouare": ["I'm DenisJava. A Java/NodeJS developer.", "| Social network | Username  | Link                                |", "|----------------|-----------|-------------------------------------|", "| Discord        | denisjava | send friend request                 |", "| Modrinth       | DenisJava | https://modrinth.com/user/DenisJava |"],
@@ -20,5 +20,8 @@
         }
     },
 
-    "project": "Project"
+    "project": "Project",
+    "limbo": "You are in strange place. Even developer of this website has no idea what happend. ¯\\_(ツ)_/¯",
+    "change_lang": "изменить язык",
+    "toprofile": "home page"
 }

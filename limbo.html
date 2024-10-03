@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>LIMBO</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+            * {
+                font-family: "JetBrains Mono", monospace;
+                font-optical-sizing: auto;
+                font-weight: 300;
+                font-style: normal;
+            }
+
+            html, body {
+                padding: 0px;
+                margin: 0px;
+                background-color: black;
+                color: white;
+            }
+
+            #stdin {
+                outline: none;
+                background: none;
+                border: none;
+                color: white;
+                flex-grow: 1;
+            }
+            #btme {
+                width: 100%;
+                position: fixed;
+                bottom: 0px;
+                padding: 15px;
+                display: flex;
+                flex-direction: row;
+            }
+            .bigger {
+                font-size: large;
+            }
+            ::-webkit-scrollbar {
+                display: none;
+            }
+            .line {
+                text-wrap: nowrap;
+                white-space: nowrap;
+                white-space-collapse: preserve;
+            }
+        </style>
+    </head>
+    <body style="position: relative;">
+        <div id="console" style="overflow-y: scroll; height: auto; width: 100vw; padding-left: 30px; padding-right: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="line" style="text-align: center;" id="text">ERR::NO::LM</div>
+            <div class="line" style="text-align: center;"> </div>
+            <div class="line" style="text-align: center;" id="action">ERR::NO::LM</div>
+            <div class="line" style="text-align: center; display: none;" id="preserve1"> </div>
+            <div class="line" style="text-align: center; display: none; color: red;" id="preserve2"> </div>
+        </div>
+
+        <script>
+            let lang = {version: "v0"};
+            let a = 0;
+            if (localStorage.getItem("lang") == null) {
+                console.log("Language not set. Reloading...");
+                localStorage.setItem("lang", "EN_US")
+                window.location.reload();
+            }
+            fetch('localizations/cnsl_' + localStorage.getItem("lang") + ".json")
+                .then((response) => {
+                    response.json().then(
+                        (data) => {
+                            lang = data;
+                            start();
+                        }
+                    ).catch((reason) => {
+                        console.error("FAILED TO LOAD LM: " +reason)
+                    })
+                }).catch((reason) => {
+                    console.error("FAILED TO LOAD LM: " + reason)
+                })
+            
+
+            function start() {
+                if (lang.version === "v0") {
+                    alert("FAILED TO LOAD LM")
+                }
+                document.getElementById("text").innerHTML = lang.limbo;
+                document.getElementById("action").innerHTML = `[1] ${lang.change_lang}  [2] ${lang.toprofile}`;
+
+                document.addEventListener("keypress", (ev) => {
+                    if (ev.key === "1") {
+                        localStorage.removeItem("hideWelcomeMsg")
+                        localStorage.setItem("lang", lang.lang === "EN_US" ? "RU_RU" : "EN_US");
+                        window.location.reload();
+                    }
+                    if (ev.key === "2") {
+                        window.location = "index.html?from=limbo"
+                    }
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const reason = urlParams.get('reason');
+                if (reason === "error") {
+                    document.getElementById("preserve1").style.display = "block";
+                    document.getElementById("preserve2").style.display = "block";
+                    document.getElementById("preserve2").innerHTML = urlParams.get("b");
+                }
+            }
+        </script>
+    </body>
+</html>

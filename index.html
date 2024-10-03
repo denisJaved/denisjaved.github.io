@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="yandex-verification" content="776e67282a9fc93d" />
+        <meta name="description" content="Профиль DenisJava">
         <link rel="icon" href="https://denisjaved.gituhb.io/favicon.ico" type="image/x-icon">
 
         <title>DenisJava</title>
@@ -104,10 +105,10 @@
                             start();
                         }
                     ).catch((reason) => {
-                        postErr("FAILED TO LOAD LM: " +reason)
+                        document.location = "limbo.html?reason=error&b=" + "LM:LOAD0:" + reason;
                     })
                 }).catch((reason) => {
-                    postErr("FAILED TO LOAD LM: " + reason)
+                    document.location = "limbo.html?reason=error&b=" + "LM:LOAD1:" + reason;
                 })
             
             function send(i) {
@@ -178,13 +179,16 @@
                     post("rm: it is dangerous to operate recursively on '/'");
                     post("rm: use --no-preserve-root to override this failsafe");
                 } else if (i == "rm -rf / --no-preserve-root" || i == "rm -rf --no-preserve-root /" || i == "rm --no-preserve-root -rf /") {
-                    window.close();
-                    post("Hah. Your window should close.")
+                    document.getElementsByTagName("body")[0].style.display = 'none';
+                    document.location = "limbo.html?reason=critical-files-corrupted";
                 } else if (i.startsWith("sudo")){
                     postErr("WDYM? No user system here) Do whatever you want!");
                 } else if (i === "license"){
                     post("AGPL-3.0 license");
                     post("https://github.com/denisJaved/denisjaved.github.io?tab=AGPL-3.0-1-ov-file");
+                } else if (i === "@clear") {
+                    localStorage.clear();
+
                 } else {
                     postErr("Unknown command recived: " + i);
                 }
