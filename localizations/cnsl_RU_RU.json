@@ -10,13 +10,33 @@
     "help": ["whoyouare - рассказывает кто я", "projects - показывает мои проекты", "", "help - показывает эту страницу", "echo - отправляет текст в консоль", "@echo - переключает отображения комманд пользователя", "@clear - удаляет все данные сохранёные этим сайтом."],
     "intro": ["projects - мои проекты"],
 
-    "whoyouare": ["Я DenisJava - разработчик на Java и NodeJS.", "| Social network | Username  | Link                                |", "|----------------|-----------|-------------------------------------|", "| Discord        | denisjava | отправь заявку в друзья             |", "| Modrinth       | DenisJava | https://modrinth.com/user/DenisJava |"],
-    "projects": ["->> Мои проекты:", "[this] Сайт для профиля в стили консоли", "[ -1 ] Онлайн аллерголог", "[ 0  ] Home Sweet Home", "", "Используйте комманду project, чтобы получить больше информации."],
+    "whoyouare": ["Я DenisJava - разработчик на Java и NodeJS.", "| Social network | Username   | Link                                |", 
+    "|----------------|------------|-------------------------------------|", 
+    "| Discord        | denisjava  | отправь заявку в друзья             |", 
+    "| Telegram       | Denisjava  | https://t.me/DenisJava              |",
+    "| GitHub         | denisJaved | https://github.com/denisJaved       |",
+    "| Modrinth       | DenisJava  | https://modrinth.com/user/DenisJava |"],
+    "projects": ["->> Мои проекты:", "[this] Сайт для профиля в стили консоли", "[ -1 ] Онлайн аллерголог", "[ 0  ] Home Sweet Home", "[ 1  ] RuSSript", "", "Используйте комманду project, чтобы получить больше информации."],
     "projectData": {
         "this": {
             "name": "Мой профиль",
             "description": ["       | Сайт сделан в стиле консоли.", "       | Пользователи linux заценят!"],
             "link": "https://denisjaved.github.io/"
+        },
+        "-1": {
+            "name": "Онлайн алерголог",
+            "description": ["       | Телеграм бот для определения и получений информации про алергические заболевания."],
+            "link": "https://github.com/denisJaved/DoctorAlergologDoma"
+        },
+        "0": {
+            "name": "HomeSweetHome",
+            "description": ["       | Эта информация пока недоступна."],
+            "link": "НЕТ ИНФОРМАЦИИ"
+        },
+        "1": {
+            "name": "RuSSript",
+            "description": "Язык программирования транслируемый прямо в JavaScript в вашем браузере.",
+            "link": "https://github.com/denisJaved/RuSSript"
         }
     },
 
