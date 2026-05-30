@@ -74,7 +74,7 @@
     </div>
     <div class="funzone">
       <div class="funzone-a">
-        <div class="funplayer">
+        <div class="funplayer" id="funplayer">
           <div class="funplayer-a"></div>
           <div class="funplayer-b">
             <div class="funplayer-top">
@@ -82,7 +82,7 @@
                 <div class="funplayer-light"></div>
                 POWER
               </div>
-              <div class="funplayer-indic funplayer-light-red mono">
+              <div class="funplayer-indic funplayer-light-red mono" id="funplayer-tape-light">
                 <div class="funplayer-light"></div>
                 TAPE
               </div>
@@ -91,8 +91,10 @@
             </div>
             <div class="funplayer-med">
               <div class="funplayer-disp">
-                <div class="sub"><span class="inactive">PLAY</span> <span>N/T</span> <span class="inactive">EXT</span></div>
-                🯰🯰:🯰🯰:🯰🯰<span> - NO TAPE</span><br />
+                <div class="sub">
+                  <span class="inactive" id="funplayer-play">PLAY</span> <span id="funplayer-nt">N/T</span> <span class="inactive">EXT</span>
+                </div>
+                🯰🯰:🯰🯰:🯰🯰<span> - DJFUN</span><br />
                 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
               </div>
             </div>
@@ -113,7 +115,11 @@
             <div class="box-helper"></div>
             <b>Welcome to the fun zone!</b><br />
             This place has some tapes with fun experiences you can try. <span class="if-big">Just drag one into the player and enjoy!</span>
-            <span class="if-tiny">Just tap one and enjoy!</span>
+            <span class="if-tiny">Just tap one to select it, put it in this player and enjoy!</span>.<br />
+            <a class="if-big" id="funtape-force-mobile" href="?tape-mobile=true" style="color: inherit">Press here if drag-and-drop mode does not work.</a>
+            <a class="if-big" id="funtape-unforce-mobile" href="/" style="color: inherit; display: none"
+              >You disabled drag-and-drop. Press here to enable it.</a
+            >
           </div>
           <div class="multirow" style="margin-top: 20px">
             <div class="funtape-holder">
@@ -123,14 +129,25 @@
                   <span class="brand">COLOR<br />FILTER</span>
                   <span class="lbl">+</span>
                 </div>
-                <div class="mid"></div>
+                <div class="fg"></div>
                 <div class="info">
                   <span class="descriptor">HIGH QUALITY FUN TAPE · COOL EXPERIENCE</span>
                   <div class="designation">AFFECTS ENTIRE SCREEN</div>
                 </div>
-                <div class="footer">
-                  <span class="badge sciencegothic">DJFUN</span>
+                <div class="ft-footer">
+                  <span class="badge sciencegothic ft-badge">DJFUN</span>
                   <span class="origin">USE WITH CAUTION.<br />MAY BE BEAUTIFUL!</span>
+                </div>
+              </div>
+            </div>
+            <div class="funtape-holder">
+              <div class="funtape ft2" id="secret_tape">
+                <div class="header center-flex">?</div>
+                <div class="fg"></div>
+                <div class="info">THE MOST SECRET TAPE IN THE LIBRARY</div>
+                <div class="ft-footer">
+                  <span class="badge sciencegothic ft-badge">DJFUN</span>
+                  <span class="origin">USE WITH CAUTION.<br />SENSETIVE MATERIAL!</span>
                 </div>
               </div>
             </div>
@@ -145,9 +162,17 @@
                   <span class="descriptor">LOW COLOR EXPERIENCE</span>
                   <div class="designation">AFFECTS ENTIRE SCREEN</div>
                 </div>
-                <div class="footer">
-                  <span class="badge sciencegothic">DJFUN</span>
+                <div class="ft-footer">
+                  <span class="badge sciencegothic ft-badge">DJFUN</span>
                   <span class="origin">USE WITH CAUTION.<br />MIGHT LOOK OLD!</span>
+                </div>
+              </div>
+            </div>
+            <div class="funtape-holder" id="funplayer-extra-holder">
+              <div class="box funtape-holder-empty">
+                <div class="box-helper"></div>
+                <div class="center-flex">
+                  <p>INSERT TAPE<br />HERE</p>
                 </div>
               </div>
             </div>

@@ -1,5 +1,10 @@
 // 🯰🯱🯲🯳🯴🯵🯶🯷🯸🯹
-const mobile = document.body.clientWidth < 1000;
+const forceMobile = new URLSearchParams(window.location.search).has("tape-mobile");
+if (forceMobile) {
+  document.getElementById("funtape-force-mobile")!.style.display = "none";
+  document.getElementById("funtape-unforce-mobile")!.style.display = "block";
+}
+const mobile = document.body.clientWidth < 1000 || forceMobile;
 const tapes = document.querySelectorAll(".funtape");
 
 function dragStart(event: DragEvent) {
@@ -49,10 +54,38 @@ function initHolder(holder: HTMLDivElement) {
   holder.addEventListener("dragover", dragOver);
 }
 
+let mobileSelectedTape: HTMLDivElement | null = null;
+function mobileTap(event: PointerEvent, target: HTMLDivElement) {
+  if (mobileSelectedTape == null) {
+    mobileSelectedTape = target.querySelector(".funtape");
+    if (mobileSelectedTape != null) target.classList.add("funtape-holder-selected-mobile");
+  } else {
+    const empty: HTMLDivElement | null = target.querySelector(".funtape-holder-empty");
+    if (empty == null) return;
+    empty.remove();
+    if (mobileSelectedTape.parentElement?.id == "funplayer-holder") {
+      deactivateTape(mobileSelectedTape);
+    }
+    mobileSelectedTape.parentElement?.append(empty);
+    mobileSelectedTape.parentElement?.classList.remove("funtape-holder-selected-mobile");
+    mobileSelectedTape.remove();
+    target.append(mobileSelectedTape);
+    if (target.id == "funplayer-holder") {
+      activateTape(mobileSelectedTape);
+    }
+    mobileSelectedTape = null;
+  }
+}
+function initHolderMobile(holder: HTMLDivElement) {
+  holder.onclick = (e) => mobileTap(e, holder);
+}
+
 tapes.forEach(
   mobile
     ? (tape) => {
         // Mobile init
+        const holder = tape.parentElement as HTMLDivElement;
+        initHolderMobile(holder);
       }
     : (tape) => {
         // Desktop init
@@ -63,8 +96,12 @@ tapes.forEach(
         initHolder(holder);
       },
 );
-if (!mobile) {
+if (mobile) {
+  initHolderMobile(document.getElementById("funplayer-holder")! as HTMLDivElement);
+  initHolderMobile(document.getElementById("funplayer-extra-holder")! as HTMLDivElement);
+} else {
   initHolder(document.getElementById("funplayer-holder")! as HTMLDivElement);
+  initHolder(document.getElementById("funplayer-extra-holder")! as HTMLDivElement);
 }
 
 const tapeScripts: any = {
@@ -99,6 +136,37 @@ const tapeScripts: any = {
       document.body.classList.remove("ft1-effect");
     },
   },
+  secret_tape: {
+    apply: (tape: HTMLDivElement, tp: any) => {
+      setTimeout(tp.auth, 0, tape, tp);
+    },
+    auth: async (tape: HTMLDivElement, tp: any) => {
+      const aesjs = await import("aes-js");
+      try {
+        const hex = prompt("Decryption key is required to load tape's data");
+        if (hex == null) return tp.on_fail(tape, tp);
+        const fromHexString = (hexString: string) => Uint8Array.from(hexString.match(/.{1,2}/g)!.map((byte) => parseInt(byte, 16)));
+        const key = fromHexString(hex);
+        let aesEcb = new aesjs.ModeOfOperation.ecb(key);
+        let decryptedBytes = aesEcb.decrypt(fromHexString("d931e9761c792f9d78c269f42b9077b61178bdc10389c64d6479435f1e1f00af"));
+        let decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+        if (decryptedText.startsWith("http")) {
+          open(decryptedText + "?key=" + hex.toUpperCase());
+        } else {
+          throw new Error("Bad key");
+        }
+      } catch {
+        tp.on_fail(tape, tp);
+      }
+    },
+    on_fail: (tape: HTMLDivElement, tp: any) => {
+      const overlay = createTapeOverlay(tape, tp);
+      overlay.innerHTML += '<h3 style="color: red;">Decryption key is not valid.</h3>';
+    },
+    destroy: (tape: HTMLDivElement, tp: any) => {
+      destroyTapeOverlay(tape, tp);
+    },
+  },
   /*
   _template: {
     apply: (tape: HTMLDivElement, tp: any) => {},
@@ -111,11 +179,27 @@ function activateTape(tape: HTMLDivElement) {
   console.log("Activated tape", tape.id);
   const tp = tapeScripts[tape.id];
   tp?.apply(tape, tp);
+
+  const light = document.getElementById("funplayer-tape-light")! as HTMLDivElement;
+  const play = document.getElementById("funplayer-play")! as HTMLSpanElement;
+  const nt = document.getElementById("funplayer-nt")! as HTMLSpanElement;
+  light.classList.remove("funplayer-light-red");
+  light.classList.add("funplayer-light-green");
+  play.classList.remove("inactive");
+  nt.classList.add("inactive");
 }
 function deactivateTape(tape: HTMLDivElement) {
   console.log("Deactivated tape", tape.id);
   const tp = tapeScripts[tape.id];
   tp?.destroy(tape, tp);
+
+  const light = document.getElementById("funplayer-tape-light")! as HTMLDivElement;
+  const play = document.getElementById("funplayer-play")! as HTMLSpanElement;
+  const nt = document.getElementById("funplayer-nt")! as HTMLSpanElement;
+  light.classList.remove("funplayer-light-green");
+  light.classList.add("funplayer-light-red");
+  play.classList.add("inactive");
+  nt.classList.remove("inactive");
 }
 function createTapeOverlay(tape: HTMLDivElement, tp: any): HTMLDivElement {
   const container = document.createElement("div");
