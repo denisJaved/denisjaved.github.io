@@ -1,0 +1,19 @@
+{
+  "name": "parcel-vanilla-starter",
+  "private": true,
+  "version": "0.0.0",
+  "browserslist": "baseline widely available, Firefox ESR, not dead",
+  "source": "src/index.html",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap-icons": "^1.13.1"
+  }
+}
