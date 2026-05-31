@@ -1,3 +1,5 @@
+import { formatColoredString } from "./utils";
+
 const terminal = document.getElementById("terminal")!;
 const expandBtn = document.getElementById("terminal-expand")!;
 const inputWrap = document.getElementById("terminal-input-wrap")!;
@@ -5,41 +7,7 @@ const input = document.getElementById("terminal-input")! as HTMLInputElement;
 const terminalWindow = document.querySelector(".terminal-window")!;
 
 function pushLine(text: string) {
-  const line = document.createElement("div");
-  let last: HTMLSpanElement = document.createElement("span");
-  last.classList.add("cw");
-  line.append(last);
-  const first = last;
-  let next_color: boolean = false;
-  let next_bg: boolean = false;
-  for (let i = 0; i < text.length; i++) {
-    let c = text[i];
-    if (c == "" || c == "") {
-      next_color = true;
-      if (c == "") next_bg = true;
-      continue;
-    }
-    if (next_color) {
-      if (c == "q") c = "bl";
-      if (c == "Q") c = "BL";
-      const lc = c.toLowerCase();
-      let color = lc == c ? "c" + c : `c${lc}d`;
-      if (next_bg) color = "b" + color;
-
-      last = document.createElement("span");
-      last.classList.add(color);
-      line.append(last);
-
-      next_color = false;
-      next_bg = false;
-      continue;
-    }
-    last.innerText += c;
-  }
-  if (first.innerText == "") {
-    first.remove();
-  }
-  terminal.append(line);
+  terminal.append(formatColoredString(text));
 }
 
 function fixTerm() {
@@ -65,7 +33,7 @@ function handleInput(cmd: string, term: string, echo: boolean) {
       "-------------------------",
       `tOSw: ${os}`,
       `tKernelw: ${windows ? "Windows NT" : "Linux 7.0.10"}`,
-      `tPackagesw: ${windows ? "∞ bloatware" : "9 (flatpak), 1634 (pacman)"}`,
+      `tPackagesw: ${windows ? "∞ bloatware" : "9 (flatpak), 1634 (pacman). 2354654 updates available"}`,
       `tShellw: ${term}`,
       `tUAw: ${navigator.userAgent}`,
       `q██r██g██o██p██t██w██`,

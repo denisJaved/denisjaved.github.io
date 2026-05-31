@@ -1,3 +1,5 @@
+import { fromHexString } from "./utils";
+
 // 🯰🯱🯲🯳🯴🯵🯶🯷🯸🯹
 const forceMobile = new URLSearchParams(window.location.search).has("tape-mobile");
 if (forceMobile) {
@@ -145,7 +147,6 @@ const tapeScripts: any = {
       try {
         const hex = prompt("Decryption key is required to load tape's data");
         if (hex == null) return tp.on_fail(tape, tp);
-        const fromHexString = (hexString: string) => Uint8Array.from(hexString.match(/.{1,2}/g)!.map((byte) => parseInt(byte, 16)));
         const key = fromHexString(hex);
         let aesEcb = new aesjs.ModeOfOperation.ecb(key);
         let decryptedBytes = aesEcb.decrypt(fromHexString("d931e9761c792f9d78c269f42b9077b61178bdc10389c64d6479435f1e1f00af"));

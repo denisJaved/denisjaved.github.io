@@ -37,21 +37,22 @@
   flex-direction: row;
   padding-inline: 4px;
   user-select: none;
+  border-bottom: 1px solid #494b4c;
 }
 
-.window-deco .btn {
+.terminal-window .window-deco .btn {
   position: relative;
   --btn-hover: #ffffff;
 }
-.window-deco .btn-warn {
+.terminal-window .window-deco .btn-warn {
   --btn-hover: #e38181;
 }
-.window-deco .window-title {
+.terminal-window .window-deco .window-title {
   text-align: center;
   flex-grow: 1;
   font-size: 0.9em;
 }
-.window-deco .btn::before {
+.terminal-window .window-deco .btn::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -62,14 +63,14 @@
   border-radius: 1000px;
   z-index: 1;
 }
-.window-deco .btn:hover::before {
+.terminal-window .window-deco .btn:hover::before {
   background-color: var(--btn-hover);
 }
-.window-deco .btn i {
+.terminal-window .window-deco .btn i {
   position: relative;
   z-index: 10;
 }
-.window-deco .btn:hover i {
+.terminal-window .window-deco .btn:hover i {
   color: #292c30;
 }
 
@@ -123,23 +124,11 @@
 #terminal .crd {
   color: var(--term-red-dim);
 }
-#terminal .bcr {
-  background-color: var(--term-red);
-}
-#terminal .bcrd {
-  background-color: var(--term-red-dim);
-}
 #terminal .cg {
   color: var(--term-green);
 }
 #terminal .cgd {
   color: var(--term-green-dim);
-}
-#terminal .bcg {
-  background-color: var(--term-green);
-}
-#terminal .bcgd {
-  background-color: var(--term-green-dim);
 }
 #terminal .co {
   color: var(--term-orange);
@@ -147,23 +136,11 @@
 #terminal .cod {
   color: var(--term-orange-dim);
 }
-#terminal .bco {
-  background-color: var(--term-orange);
-}
-#terminal .bcod {
-  background-color: var(--term-orange-dim);
-}
 #terminal .cb {
   color: var(--term-blue);
 }
 #terminal .cbd {
   color: var(--term-blue-dim);
-}
-#terminal .bcb {
-  background-color: var(--term-blue);
-}
-#terminal .bcbd {
-  background-color: var(--term-blue-dim);
 }
 #terminal .cp {
   color: var(--term-purple);
@@ -171,23 +148,11 @@
 #terminal .cpd {
   color: var(--term-purple-dim);
 }
-#terminal .bcp {
-  background-color: var(--term-purple);
-}
-#terminal .bcpd {
-  background-color: var(--term-purple-dim);
-}
 #terminal .ct {
   color: var(--term-teal);
 }
 #terminal .ctd {
   color: var(--term-teal-dim);
-}
-#terminal .bct {
-  background-color: var(--term-teal);
-}
-#terminal .bctd {
-  background-color: var(--term-teal-dim);
 }
 #terminal .cw {
   color: var(--term-white);
@@ -195,22 +160,10 @@
 #terminal .cwd {
   color: var(--term-white-dim);
 }
-#terminal .bcw {
-  background-color: var(--term-white);
-}
-#terminal .bcwd {
-  background-color: var(--term-white-dim);
-}
-#terminal .cbl {
+#terminal .cq {
   color: var(--term-black);
 }
-#terminal .cbld {
+#terminal .cqd {
   color: var(--term-black-dim);
-}
-#terminal .bcbl {
-  background-color: var(--term-black);
-}
-#terminal .bcbld {
-  background-color: var(--term-black-dim);
 }
 /** END GENERATED **/

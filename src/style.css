@@ -4,6 +4,7 @@ body {
   min-height: 100%;
   padding: 0px;
   margin: 0px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -163,6 +164,12 @@ p {
   right: -1px;
   border-right: 2px solid var(--box-border);
   border-bottom: 2px solid var(--box-border);
+}
+
+.box.box-red {
+  border: 1px solid #600505;
+  background-color: #350404;
+  --box-border: #8f0808;
 }
 
 /* Separators */
@@ -637,4 +644,102 @@ p {
 .ft2 .origin {
   font-size: 7.5px;
   letter-spacing: 0.12em;
+}
+
+/* About screen */
+.about-device {
+  background-color: #434343;
+}
+
+.about-btns {
+  gap: 20px;
+  padding: 15px;
+  border-right: 3px solid #2d2d2d;
+}
+
+.about-btns button {
+  background-color: #1a1a1a;
+  border: none;
+  padding: 15px;
+  color: #757575;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: large;
+  --pill-color: #cd5901;
+  --pill-hover: #ff9d53;
+}
+
+.about-btns .inactive {
+  --pill-color: #2c2c2c;
+  --pill-hover: #2c2c2c;
+  cursor: no-drop;
+}
+
+.about-btns .err {
+  --pill-color: #b20303;
+  --pill-hover: #da4444;
+}
+
+.about-btns button::after {
+  display: block;
+  content: "";
+  background-color: var(--pill-color);
+  width: 35px;
+  height: 4px;
+  transition: 100ms;
+}
+
+.about-btns button:hover::after {
+  background-color: var(--pill-hover);
+}
+
+.about-screen-wrapper {
+  background-color: #434343;
+  padding: 15px;
+}
+
+.about-screen {
+  background-image: linear-gradient(to top, #000000 3px, #0b0b0b 2px);
+  background-size: 100% 4px;
+  height: 100%;
+  width: 40vw;
+  color: #dadada;
+  padding: 5px;
+  padding-inline: 15px;
+  position: relative;
+}
+
+.about-screen::after {
+  content: "";
+  background-image: linear-gradient(to top, transparent 3px, #0303036f 2px);
+  background-size: 100% 4px;
+  position: absolute;
+  inset: 0px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.about-screen ::selection,
+.about-screen ::-moz-selection {
+  background-color: #0071205a;
+  color: inherit;
+}
+
+.about-screen .cb {
+  color: #1662ef;
+}
+
+.about-screen .cg {
+  color: #0b9312;
+}
+
+.about-screen .cn {
+  color: #484848;
+}
+
+.about-screen .cr {
+  color: #af1a1a;
 }
