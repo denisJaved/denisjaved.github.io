@@ -75,6 +75,9 @@ body {
   .tiny-w90 {
     width: 90vw;
   }
+  .multirow {
+    justify-content: center;
+  }
 }
 @media (width >= 1000) {
   .row {
@@ -230,21 +233,21 @@ p {
 }
 
 /* Social section */
-.social-row {
+.moz-no-hide-pls-social-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
   user-select: none;
 }
-.social-row a {
+.moz-no-hide-pls-social-row a {
   text-decoration: none;
   color: #ffffff;
   font-size: 2rem;
   height: 2rem;
   width: 2rem;
 }
-.social-row a > img {
+.moz-no-hide-pls-social-row a > img {
   height: 100%;
   width: 100%;
 }
